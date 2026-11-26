@@ -40,21 +40,28 @@ export const empresa = {
       cargo: "CEO e Desenvolvedor Full Stack",
       foto: "/images/brian.png",
       alt: "Foto de Brian Italo",
-      descricao: "Lidera a visão estratégica e atua diretamente no desenvolvimento das aplicações"
+      descricao: "Lidera a visão estratégica da empresa  atua diretamente no desenvolvimento e sistemas robustos e sob medida."
     },
     {
       nome: "Kevin Hash",
       cargo: "Analista de Segurança da Informação",
       foto: "/images/kevin.png",
       alt: "Foto de Kevin Hash",
-      descricao: "Responsável por estruturar e proteger os bancos de dados dos clientes."
+      descricao: "Protege os dados e a integridade de todas as aplicações através de defesas seguras e confiáveis."
     },
     {
       nome: "Lourival Campelo",
       cargo: "Designer UI/UX e Desenvolvedor Front-End",
       foto: "/images/lourival.jpeg",
       alt: "Foto de Lourival Campelo",
-      descricao: "Responsável por estruturar e proteger os bancos de dados dos clientes."
+      descricao: "Projeta interfaces intuitivas e modernas, garantindo uma navegação simples  para o usuário"
+    },
+    {
+      nome: "Will Lan Dafoe",
+      cargo: "Diretor de Tecnologia (CTO)",
+      foto: "/images/will.png",
+      alt: "Foto de Will Lan",
+      descricao: "Define a arquitetura dos sistemas, escolhe as melhores tecnologias e garante o desempenho e a estabilidade."
     }
   ]
 };
