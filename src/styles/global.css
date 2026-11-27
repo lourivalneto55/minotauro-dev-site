@@ -17,7 +17,7 @@
   --degrade-hero: none;
 
   /* Variáveis Estruturais */
-  --borda-raio: 2px;
+  --borda-raio: 14px;
   --sombra-cartao: 0 6px 16px rgba(0, 0, 0, 0.35);
   --sombra-cartao-hover: 0 10px 24px rgba(0, 0, 0, 0.5);
   --espacamento-secao: 4rem;
@@ -99,10 +99,9 @@ a:hover {
   border-radius: var(--borda-raio);
   font-weight: 700;
   text-align: center;
-  /* cantos cortados, como a máscara do logo */
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   transition: background-color 0.15s ease, color 0.15s ease;
-}
+
+
 
 .btn:hover {
   background-color: var(--cor-destaque);
