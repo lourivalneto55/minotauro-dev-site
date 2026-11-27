@@ -1,0 +1,28 @@
+<div class="grade-tech" aria-hidden="true"></div>
+
+<style>
+	/* Grade simples de linhas vermelhas, deslizando devagar */
+	.grade-tech {
+		position: fixed;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+		background-image:
+			linear-gradient(rgba(248, 0, 24, 0.18) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(248, 0, 24, 0.18) 1px, transparent 1px);
+		background-size: 64px 64px;
+		animation: deslizar 20s linear infinite;
+	}
+
+	@keyframes deslizar {
+		to {
+			background-position: 0 64px, 64px 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.grade-tech {
+			animation: none;
+		}
+	}
+</style>

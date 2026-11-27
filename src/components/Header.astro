@@ -7,7 +7,7 @@ const currentPath = Astro.url.pathname;
 <header class="cabecalho">
 	<div class="faixa-topo"></div>
 	<div class="container cabecalho-container">
-		<a href="/">
+		<a href="/" class="logo-link">
 			<img 
 				src="/images/logo.png" 
 				alt={`Logotipo da ${empresa.nome}`} 
@@ -28,13 +28,17 @@ const currentPath = Astro.url.pathname;
 
 <style>
 	.faixa-topo {
-		height: 4px;
+		height: 6px;
 		background: var(--degrade-marca);
 	}
 
-	.cabecalho {
-		background-color: var(--cor-fundo);
-		border-bottom: 1px solid var(--cor-borda);
+		.cabecalho {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		background-color: var(--cor-destaque);
+		border-bottom: 2px solid var(--cor-primaria);
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 		padding-bottom: 1rem;
 	}
 
@@ -48,7 +52,7 @@ const currentPath = Astro.url.pathname;
 	}
 
 	.logo-img {
-		height: 60px; /* Logo maior e legível */
+		height: 54px;
 		width: auto;
 		display: block;
 	}
@@ -61,8 +65,9 @@ const currentPath = Astro.url.pathname;
 	}
 
 	.navegacao a {
-		font-weight: 600;
-		color: var(--cor-texto);
+		font-weight: 700;
+		font-size: 0.95rem;
+		color: var(--cor-primaria);
 		padding: 0.5rem 0;
 		border-bottom: 2px solid transparent;
 	}

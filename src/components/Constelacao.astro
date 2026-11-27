@@ -1,0 +1,106 @@
+<canvas id="constelacao" aria-hidden="true"></canvas>
+
+<style>
+	#constelacao {
+		position: fixed;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		pointer-events: none;
+	}
+</style>
+
+<script>
+	// Constelação animada (só na página inicial): estrelas bege, ligações vermelhas, reage ao mouse
+	const canvas = document.getElementById('constelacao') as HTMLCanvasElement;
+	const ctx = canvas.getContext('2d')!;
+	const reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const DISTANCIA = 140;
+	const DISTANCIA_MOUSE = 180;
+	const mouse = { x: -9999, y: -9999 };
+	type Estrela = { x: number; y: number; vx: number; vy: number; r: number };
+	let estrelas: Estrela[] = [];
+	let largura = 0;
+	let altura = 0;
+
+	function ajustar() {
+		const dpr = window.devicePixelRatio || 1;
+		largura = window.innerWidth;
+		altura = window.innerHeight;
+		canvas.width = largura * dpr;
+		canvas.height = altura * dpr;
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		const qtd = Math.min(80, Math.floor((largura * altura) / 20000));
+		estrelas = Array.from({ length: qtd }, () => ({
+			x: Math.random() * largura,
+			y: Math.random() * altura,
+			vx: (Math.random() - 0.5) * 0.35,
+			vy: (Math.random() - 0.5) * 0.35,
+			r: Math.random() * 1.2 + 0.8,
+		}));
+	}
+
+	function desenhar() {
+		ctx.clearRect(0, 0, largura, altura);
+
+		for (const e of estrelas) {
+			if (!reduzMovimento) {
+				e.x += e.vx;
+				e.y += e.vy;
+				if (e.x < 0 || e.x > largura) e.vx *= -1;
+				if (e.y < 0 || e.y > altura) e.vy *= -1;
+			}
+		}
+
+		for (let i = 0; i < estrelas.length; i++) {
+			const a = estrelas[i];
+			for (let j = i + 1; j < estrelas.length; j++) {
+				const b = estrelas[j];
+				const d = Math.hypot(a.x - b.x, a.y - b.y);
+				if (d < DISTANCIA) {
+					ctx.strokeStyle = `rgba(248, 0, 24, ${(1 - d / DISTANCIA) * 0.7})`;
+					ctx.lineWidth = 1;
+					ctx.beginPath();
+					ctx.moveTo(a.x, a.y);
+					ctx.lineTo(b.x, b.y);
+					ctx.stroke();
+				}
+			}
+			const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+			if (dm < DISTANCIA_MOUSE) {
+				ctx.strokeStyle = `rgba(248, 232, 208, ${(1 - dm / DISTANCIA_MOUSE) * 0.6})`;
+				ctx.lineWidth = 1;
+				ctx.beginPath();
+				ctx.moveTo(a.x, a.y);
+				ctx.lineTo(mouse.x, mouse.y);
+				ctx.stroke();
+			}
+		}
+
+        for (const e of estrelas) {
+	        ctx.fillStyle = 'rgba(248, 232, 208, 0.85)';
+	        ctx.beginPath();
+	        ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+	        ctx.fill();
+        }
+		ctx.shadowBlur = 0;
+
+		if (!reduzMovimento) requestAnimationFrame(desenhar);
+	}
+
+	window.addEventListener('resize', () => {
+		ajustar();
+		if (reduzMovimento) desenhar();
+	});
+	window.addEventListener('mousemove', (ev) => {
+		mouse.x = ev.clientX;
+		mouse.y = ev.clientY;
+	});
+	window.addEventListener('mouseleave', () => {
+		mouse.x = mouse.y = -9999;
+	});
+
+	ajustar();
+	desenhar();
+</script>

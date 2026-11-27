@@ -10,18 +10,26 @@ const { destaque } = Astro.props;
 	.cartao {
 		background-color: var(--cor-fundo);
 		border: 1px solid var(--cor-borda);
+		border-left: 4px solid var(--cor-secundaria);
 		border-radius: var(--borda-raio);
 		padding: 2rem;
 		box-shadow: var(--sombra-cartao);
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 	}
 
 	.cartao:hover {
 		transform: translateY(-4px);
+		border-color: var(--cor-destaque);
+		border-left-color: var(--cor-secundaria);
 		box-shadow: var(--sombra-cartao-hover);
 	}
 
 	.cartao-destaque {
+		border-left: 1px solid var(--cor-borda);
 		border-top: 4px solid var(--cor-secundaria);
+	}
+
+	.cartao-destaque:hover {
+		border-left-color: var(--cor-destaque);
 	}
 </style>
